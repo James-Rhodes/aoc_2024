@@ -37,9 +37,7 @@ struct Report {
 
 impl Report {
     fn is_safe_part_one(&self) -> bool {
-        if (self.all_increasing().is_none() || self.all_decreasing().is_none())
-            && self.adjacent_differences_safe().is_none()
-        {
+        if (self.all_increasing() || self.all_decreasing()) && self.adjacent_differences_safe() {
             return true;
         }
         false
@@ -62,42 +60,42 @@ impl Report {
         false
     }
 
-    fn all_increasing(&self) -> Option<usize> {
-        for (i, win) in self.levels.windows(2).enumerate() {
+    fn all_increasing(&self) -> bool {
+        for win in self.levels.windows(2) {
             let a = win[0];
             let b = win[1];
             if a >= b {
-                return Some(i);
+                return false;
             }
         }
 
-        return None;
+        return true;
     }
 
-    fn all_decreasing(&self) -> Option<usize> {
-        for (i, win) in self.levels.windows(2).enumerate() {
+    fn all_decreasing(&self) -> bool {
+        for win in self.levels.windows(2) {
             let a = win[0];
             let b = win[1];
             if a <= b {
-                return Some(i);
+                return false;
             }
         }
 
-        return None;
+        return true;
     }
 
-    fn adjacent_differences_safe(&self) -> Option<usize> {
-        for (i, win) in self.levels.windows(2).enumerate() {
+    fn adjacent_differences_safe(&self) -> bool {
+        for win in self.levels.windows(2) {
             let a = win[0];
             let b = win[1];
 
             let diff = usize::abs_diff(a, b);
             if diff < 1 || diff > 3 {
-                return Some(i);
+                return false;
             }
         }
 
-        None
+        true
     }
 }
 
