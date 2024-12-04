@@ -27,11 +27,9 @@ fn part_two(input: &str) -> usize {
     let mut is_enabled = true;
     for pc in possible_commands {
         let arguments = get_valid_args(pc);
-        match (arguments, is_enabled) {
-            (Some((a, b)), true) => {
-                sum += a * b;
-            }
-            _ => {}
+
+        if let (Some((a, b)), true) = (arguments, is_enabled) {
+            sum += a * b;
         }
 
         is_enabled = match (pc.rfind("do()"), pc.rfind("don't()")) {

@@ -69,7 +69,7 @@ impl Report {
             }
         }
 
-        return true;
+        true
     }
 
     fn all_decreasing(&self) -> bool {
@@ -81,7 +81,7 @@ impl Report {
             }
         }
 
-        return true;
+        true
     }
 
     fn adjacent_differences_safe(&self) -> bool {
@@ -90,7 +90,7 @@ impl Report {
             let b = win[1];
 
             let diff = usize::abs_diff(a, b);
-            if diff < 1 || diff > 3 {
+            if !(1..=3).contains(&diff) {
                 return false;
             }
         }

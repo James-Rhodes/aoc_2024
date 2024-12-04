@@ -1,12 +1,16 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, time::Instant};
 
 fn main() {
     let input = include_str!("../../inputs/day_4.txt");
+    let now = Instant::now();
     let part_one_result = part_one(input);
+    println!("Part One Took: {}", now.elapsed().as_micros());
 
     println!("Part One: {part_one_result}");
 
+    let now = Instant::now();
     let part_two_result = part_two(input);
+    println!("Part Two Took: {}", now.elapsed().as_micros());
 
     println!("Part Two: {part_two_result}");
 }
@@ -127,7 +131,7 @@ fn search_direction(
     )
 }
 
-fn get_new_pos(
+const fn get_new_pos(
     incoming_pos: (usize, usize),
     direction: (i32, i32),
     x_bound: usize,
