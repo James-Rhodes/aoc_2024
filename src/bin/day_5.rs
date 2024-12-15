@@ -85,9 +85,7 @@ fn fix_update(update: &Update, rules: &Rules) -> Update {
         for j in (i + 1)..update.len() {
             //Bubble Sort Kind of Procedure
             if !a_proceeds_b_correctly(update[i], update[j], rules) {
-                let temp = update[i];
-                update[i] = update[j];
-                update[j] = temp;
+                update.swap(i, j);
             }
         }
     }
